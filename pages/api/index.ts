@@ -12,7 +12,7 @@ export const fetchTokens = async (): Promise<Token[]> => {
 
 export const fetchTokenDetails = async (params: any) => {
     const response = await axios.get(`${BASE_URL}/token`, {
-      params: {chain: params.chainId, token: params.address}
+        params: { chain: params.chainId, token: params.address },
     });
     return response.data;
-  };
+};
