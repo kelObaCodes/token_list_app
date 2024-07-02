@@ -10,6 +10,7 @@ interface OverviewPageProps {
 const Overview: React.FC<OverviewPageProps> = ({ tokens }) => {
     const [searchTerm, setSearchTerm] = useState("");
     const [currentPage, setCurrentPage] = useState(1);
+    const [favorites, setFavorites] = useState<string[]>([]);
     const tokensPerPage = 50;
 
     const filteredTokens = useMemo(() => {
@@ -29,10 +30,23 @@ const Overview: React.FC<OverviewPageProps> = ({ tokens }) => {
         () => Math.ceil(filteredTokens.length / tokensPerPage),
         [filteredTokens]
     );
+
+
     const currentTokens = useMemo(() => {
         const startIdx = (currentPage - 1) * tokensPerPage;
         return filteredTokens.slice(startIdx, startIdx + tokensPerPage);
     }, [currentPage, filteredTokens]);
+
+    const handleToggleFavorite = (tokenName:string, tokenAddress: string) => {
+        let updatedFavorites;
+        if (favorites.includes(tokenAddress)) {
+            updatedFavorites = favorites.filter(fav => fav !== tokenAddress);
+        } else {
+            updatedFavorites = [...favorites, tokenAddress];
+        }
+        setFavorites(updatedFavorites);
+        localStorage.setItem("favorites", JSON.stringify(updatedFavorites));
+    };
 
     const handlePageChange = (page: number) => {
         setCurrentPage(page);
@@ -40,9 +54,20 @@ const Overview: React.FC<OverviewPageProps> = ({ tokens }) => {
 
     useEffect(() => {
         // Reset to first page whenever the search term changes (i might change this to retain current context)
-        setCurrentPage(1); 
+        setCurrentPage(1);
     }, [searchTerm]);
 
+    useEffect(() => {
+        setFavorites(JSON.parse(localStorage.getItem("favorites") || "[]"));
+    }, []);
+
+    const sortedTokens = [...currentTokens].sort((a, b) => {
+        if (favorites.includes(a.address) && !favorites.includes(b.address))
+            return -1;
+        if (!favorites.includes(a.address) && favorites.includes(b.address))
+            return 1;
+        return 0;
+    });
     return (
         <div>
             <h1>Token Information</h1>
@@ -52,7 +77,18 @@ const Overview: React.FC<OverviewPageProps> = ({ tokens }) => {
                 value={searchTerm}
                 onChange={(e) => setSearchTerm(e.target.value)}
             />
-            <TokenList tokens={currentTokens} />
+            <div className="token-list">
+
+            {sortedTokens.map((token, index) => (
+                <TokenList
+                token={token}
+                isFavorite={favorites.includes(token.address)}
+                toggleFavorite={handleToggleFavorite}
+                key={`${token.address}-${index}`}
+            />
+            ))}
+            </div>
+
 
             {!searchTerm && (
                 <div className="pagination">
