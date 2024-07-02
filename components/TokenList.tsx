@@ -1,24 +1,57 @@
 import React from "react";
 import Link from "next/link";
-import { TokenListProps } from "../utils/tokenInterface";
+import { Token } from "../utils/tokenInterface";
+interface TokenListProps {
+    token: Token;
+    isFavorite: boolean;
+    toggleFavorite: (tokenName: string, tokenAddress: string) => void;
+}
 
-const TokenList: React.FC<TokenListProps> = ({ tokens }) => {
+interface TokenListProps {
+    token: Token;
+}
+
+const TokenList: React.FC<TokenListProps> = ({
+    token,
+    isFavorite,
+    toggleFavorite,
+}) => {
     return (
-        <div>
-            {tokens.map((token, index) => (
-                <div key={`${token.address}-${index}`} className="token-row">
-                    <img
-                        src={token.logoURI}
-                        alt={token.name}
-                        width={30}
-                        height={30}
-                    />
-                    <Link href={`/token/${token.chainId}/${token.address}`}>
-                        {token.name} ({token.symbol})
-                    </Link>
-                    <p>{token.address}</p>
+        <div className="token-column">
+            <Link href={`/token/${token.chainId}/${token.address}`}>
+                <div>
+                    {token.logoURI ? (
+                        <img
+                            src={token.logoURI}
+                            alt={token.name}
+                            width={130}
+                            height={130}
+                        />
+                    ) : (
+                        <img
+                            src="/logo.png"
+                            alt={token.name}
+                            width={130}
+                            height={130}
+                        />
+                    )}
                 </div>
-            ))}
+                <h3 className="token-name">
+                    {token.name} ({token.symbol})
+                </h3>
+
+                <p>{token.chainId}</p>
+                <p className="address-field">{token.address}</p>
+            </Link>
+            <span
+                onClick={() => toggleFavorite(token.name, token.address)}
+                className="material-symbols-outlined"
+                style={{
+                    color: isFavorite ? "red" : "gray",
+                }}
+            >
+                favorite
+            </span>
         </div>
     );
 };
