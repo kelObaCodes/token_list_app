@@ -9,3 +9,10 @@ export const fetchTokens = async (): Promise<Token[]> => {
     const tokens = Object.values(response.data.tokens).flat();
     return tokens;
 };
+
+export const fetchTokenDetails = async (params: any) => {
+    const response = await axios.get(`${BASE_URL}/token`, {
+        params: { chain: params.chainId, token: params.address },
+    });
+    return response.data;
+};
