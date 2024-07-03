@@ -1,6 +1,6 @@
 import axios from "axios";
 
-const BASE_URL = "https://li.quest/v1";
+const BASE_URL = "https://staging.li.quest/v1";
 
 import { Token, TokenResponse } from "../../utils/tokenInterface";
 

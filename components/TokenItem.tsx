@@ -1,6 +1,13 @@
 import React from "react";
 import { Token } from "../utils/tokenInterface";
 import Link from "next/link";
+import {
+    TokenItemWrapper,
+    TokenImage,
+    TokenName,
+    TokenAddress,
+    FavoriteIcon,
+} from "./styles/TokenItemStyle";
 
 interface TokenItemProps {
     token: Token;
@@ -13,39 +20,34 @@ const TokenItem: React.FC<TokenItemProps> = ({
     isFavorite,
     toggleFavorite,
 }) => (
-    <div className={`token-item ${isFavorite ? "favorite" : ""}`}>
+    <TokenItemWrapper
+        animate={{ opacity: 1 }}
+        exit={{ opacity: 0 }}
+        initial={{ opacity: 1 }}
+        transition={{ duration: 0.5 }}
+        layout
+    >
         <Link href={`/token/${token.chainId}/${token.address}`}>
             <div>
                 {token.logoURI ? (
-                    <img
-                        src={token.logoURI}
-                        alt={token.name}
-                        width={130}
-                        height={130}
-                    />
+                    <TokenImage src={token.logoURI} alt={token.name} />
                 ) : (
-                    <img
-                        src="/bitcoin-logo.png"
-                        alt={token.name}
-                        width={130}
-                        height={130}
-                    />
+                    <TokenImage src="/bitcoin-logo.png" alt={token.name} />
                 )}
             </div>
-            {token.name} ({token.symbol})<p>{token.chainId}</p>
-            <p className="token-address">{token.address}</p>
+            <TokenName>
+                {token.name} ({token.symbol})
+            </TokenName>
+            <TokenAddress>{token.address}</TokenAddress>
         </Link>
-
-        <span
+        <FavoriteIcon
             onClick={() => toggleFavorite(token.address)}
-            className="material-symbols-outlined"
-            style={{
-                color: isFavorite ? "red" : "gray",
-            }}
+            isFavorite={isFavorite}
+            className="material-symbols-outlined cursor-pointer"
         >
             favorite
-        </span>
-    </div>
+        </FavoriteIcon>
+    </TokenItemWrapper>
 );
 
 export default TokenItem;

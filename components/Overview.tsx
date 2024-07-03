@@ -3,9 +3,9 @@ import { Token } from "../utils/tokenInterface";
 import useSearchTokens from "../hooks/useSearchTokens";
 import usePagination from "../hooks/usePagination";
 import useFavorites from "../hooks/useFavourites";
-import SearchBar from "../components/SearchBar";
-import TokenList from "../components/TokenList";
-import Pagination from "../components/Pagination";
+import SearchBar from "./SearchInput";
+import TokenList from "./TokenList";
+import Pagination from "./Pagination";
 
 interface OverviewPageProps {
     tokens: Token[];
@@ -36,6 +36,7 @@ const Overview: React.FC<OverviewPageProps> = ({ tokens }) => {
         <div>
             <h1>Token Information</h1>
             <SearchBar searchTerm={searchTerm} setSearchTerm={setSearchTerm} />
+
             <TokenList
                 tokens={sortedTokens}
                 favorites={favorites}
