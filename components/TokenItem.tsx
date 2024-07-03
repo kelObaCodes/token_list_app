@@ -14,12 +14,12 @@ const TokenItem: React.FC<TokenItemProps> = ({
     toggleFavorite,
 }) => (
     <motion.div
-        animate={{ opacity: 1, scale: 1 }}
+        animate={{ opacity: 1 }}
         exit={{ opacity: 0 }}
-        initial={{ opacity: 0 }}
+        initial={{ opacity: 1 }}
         transition={{ duration: 0.5 }}
         layout
-        className={`token-item ${isFavorite ? "favorite" : ""}`}
+        className="token-item"
     >
         <Link href={`/token/${token.chainId}/${token.address}`}>
             <div>
@@ -39,15 +39,23 @@ const TokenItem: React.FC<TokenItemProps> = ({
                     />
                 )}
             </div>
-            {token.name} ({token.symbol})<p>{token.chainId}</p>
-            <p className="token-address">{token.address}</p>
+            <div>
+
+            <h3 className="name-field">
+                {token.name} ({token.symbol})
+            </h3>
+            </div>
+
+            <div className="address-field">
+                <p className="token-address">{token.address}</p>
+            </div>
         </Link>
 
         <span
             onClick={() => toggleFavorite(token.address)}
             className="material-symbols-outlined cursor-pointer fav-icon"
             style={{
-                color: isFavorite ? "red" : "gray",
+                color: isFavorite ? "#f5b5ff" : "gray",
             }}
         >
             favorite

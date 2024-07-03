@@ -1,4 +1,9 @@
 import React from "react";
+import {
+    PaginationContainer,
+    RightPaginationButton,
+    LeftPaginationButton,
+} from "./styles/paginationStyles";
 
 interface PaginationProps {
     currentPage: number;
@@ -11,21 +16,31 @@ const Pagination: React.FC<PaginationProps> = ({
     totalPages,
     handlePageChange,
 }) => (
-    <div className="pagination">
+    <PaginationContainer>
         {currentPage > 1 && (
-            <button onClick={() => handlePageChange(currentPage - 1)}>
+            <LeftPaginationButton
+                onClick={() => handlePageChange(currentPage - 1)}
+            >
+                <span className="material-symbols-outlined">
+                    chevron_backward
+                </span>
                 Previous
-            </button>
+            </LeftPaginationButton>
         )}
         <span>
             Page {currentPage} of {totalPages}
         </span>
         {currentPage < totalPages && (
-            <button onClick={() => handlePageChange(currentPage + 1)}>
+            <RightPaginationButton
+                onClick={() => handlePageChange(currentPage + 1)}
+            >
                 Next
-            </button>
+                <span className="material-symbols-outlined">
+                    chevron_forward
+                </span>
+            </RightPaginationButton>
         )}
-    </div>
+    </PaginationContainer>
 );
 
 export default Pagination;
