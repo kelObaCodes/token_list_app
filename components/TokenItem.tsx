@@ -12,7 +12,7 @@ import {
 interface TokenItemProps {
     token: Token;
     isFavorite: boolean;
-    toggleFavorite: (tokenAddress: string) => void;
+    toggleFavorite: (tokenAddress: string, tokenName: string) => void;
 }
 
 const TokenItem: React.FC<TokenItemProps> = ({
@@ -41,7 +41,7 @@ const TokenItem: React.FC<TokenItemProps> = ({
             <TokenAddress>{token.address}</TokenAddress>
         </Link>
         <FavoriteIcon
-            onClick={() => toggleFavorite(token.address)}
+            onClick={() => toggleFavorite(token.address, token.name)}
             isFavorite={isFavorite}
             className="material-symbols-outlined cursor-pointer"
         >

@@ -6,7 +6,7 @@ import { motion, AnimatePresence } from "framer-motion";
 interface TokenListProps {
     tokens: Token[];
     favorites: string[];
-    toggleFavorite: (tokenAddress: string) => void;
+    toggleFavorite: (tokenAddress: string, tokenName: string) => void;
 }
 
 const TokenList: React.FC<TokenListProps> = ({
