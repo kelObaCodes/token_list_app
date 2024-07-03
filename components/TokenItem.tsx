@@ -1,7 +1,7 @@
 import React from "react";
 import { Token } from "../utils/tokenInterface";
 import Link from "next/link";
-
+import { motion } from "framer-motion";
 interface TokenItemProps {
     token: Token;
     isFavorite: boolean;
@@ -13,7 +13,14 @@ const TokenItem: React.FC<TokenItemProps> = ({
     isFavorite,
     toggleFavorite,
 }) => (
-    <div className={`token-item ${isFavorite ? "favorite" : ""}`}>
+    <motion.div
+        animate={{ opacity: 1, scale: 1 }}
+        exit={{ opacity: 0 }}
+        initial={{ opacity: 0 }}
+        transition={{ duration: 0.5 }}
+        layout
+        className={`token-item ${isFavorite ? "favorite" : ""}`}
+    >
         <Link href={`/token/${token.chainId}/${token.address}`}>
             <div>
                 {token.logoURI ? (
@@ -38,14 +45,14 @@ const TokenItem: React.FC<TokenItemProps> = ({
 
         <span
             onClick={() => toggleFavorite(token.address)}
-            className="material-symbols-outlined"
+            className="material-symbols-outlined cursor-pointer fav-icon"
             style={{
                 color: isFavorite ? "red" : "gray",
             }}
         >
             favorite
         </span>
-    </div>
+    </motion.div>
 );
 
 export default TokenItem;

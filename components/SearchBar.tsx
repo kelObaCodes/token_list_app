@@ -6,12 +6,21 @@ interface SearchBarProps {
 }
 
 const SearchBar: React.FC<SearchBarProps> = ({ searchTerm, setSearchTerm }) => (
-    <input
-        type="text"
-        placeholder="Search Tokens"
-        value={searchTerm}
-        onChange={(e) => setSearchTerm(e.target.value)}
-    />
+    <div className="input-cover">
+        <input
+            type="text"
+            placeholder="Search for Tokens"
+            value={searchTerm}
+            className="search-bar"
+            onChange={(e) => setSearchTerm(e.target.value)}
+        />
+        <span
+            className="clear-search cursor-pointer"
+            onClick={() => setSearchTerm("")}
+        >
+            x
+        </span>
+    </div>
 );
 
 export default SearchBar;
