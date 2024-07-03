@@ -1,6 +1,12 @@
 import React, { useEffect, useState } from "react";
-
 import { Token } from "../utils/tokenInterface";
+import {
+    TokenDetailWrapper,
+    TokenImage,
+    TokenName,
+    TokenInfo,
+    FavoriteButton,
+} from "./styles/TokenDetailStyle";
 
 interface TokenDetailPageProps {
     token: Token;
@@ -32,18 +38,21 @@ const TokenDetail: React.FC<TokenDetailPageProps> = ({ token }) => {
     };
 
     return (
-        <div>
-            <h1>{token.name}</h1>
-            <img src={token.logoURI} alt={token.name} />
-            <p>Address: {token.address}</p>
-            <p>Chain Id: {token.chainId}</p>
-            <p>Price: {token.priceUSD}$</p>
-            <p>Decimal: {token.decimals}</p>
-            <p>Key: {token.coinKey}</p>
-            <button onClick={handleFavoriteClick}>
+        <TokenDetailWrapper>
+            <TokenName>{token.name}</TokenName>
+            <TokenImage src={token.logoURI} alt={token.name} />
+            <TokenInfo>Address: {token.address}</TokenInfo>
+            <TokenInfo>Chain Id: {token.chainId}</TokenInfo>
+            <TokenInfo>Price: {token.priceUSD}$</TokenInfo>
+            <TokenInfo>Decimal: {token.decimals}</TokenInfo>
+            <TokenInfo>Key: {token.coinKey}</TokenInfo>
+            <FavoriteButton
+                onClick={handleFavoriteClick}
+                isFavorite={isFavorite}
+            >
                 {isFavorite ? "Unmark Favorite" : "Mark as Favorite"}
-            </button>
-        </div>
+            </FavoriteButton>
+        </TokenDetailWrapper>
     );
 };
 

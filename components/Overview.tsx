@@ -3,7 +3,7 @@ import { Token } from "../utils/tokenInterface";
 import useSearchTokens from "../hooks/useSearchTokens";
 import usePagination from "../hooks/usePagination";
 import useFavorites from "../hooks/useFavourites";
-import SearchBar from "./SearchBar";
+import SearchBar from "./SearchInput";
 import TokenList from "./TokenList";
 import Pagination from "./Pagination";
 

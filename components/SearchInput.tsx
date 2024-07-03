@@ -4,7 +4,7 @@ import {
     SearchInput,
     SearchIcon,
     ClearSearch,
-} from "./styles/searchBarStyle";
+} from "./styles/SearchInputStyle";
 
 interface SearchBarProps {
     searchTerm: string;

@@ -48,50 +48,6 @@ a {
     'opsz' 24
 }
 
-.token-address {
-  word-wrap: break-word;
-}
-
 .cursor-pointer {
   cursor: pointer;
-}
-
-.token-item {
-  text-align: center;
-  border: 1px solid transparent;
-  border-radius: 5px;
-  transition: .8s;
-  background-color: #fff;
-  border: 1px solid #f0f2f3;
-  box-shadow: rgba(100, 100, 111, 0.2) 0px 7px 29px;
-  border: 1px solid #f0f2f3;
-  box-shadow: 0 1px 6px #00000005;
-  box-sizing: border-box;
-  position: relative;
-  padding: 20px;
-  /* box-shadow: rgba(100, 100, 111, 0.2) 0px 7px 29px; */
-
-}
-
-.token-item:hover {
-  transition: .8s;
-  background-color: #F8F8F8;
-  box-shadow: rgba(100, 100, 111, 0.2) 0px 0px 0px;
-  cursor: pointer;
-}
-
-.fav-icon {
-  position: absolute;
-  right: 11px;
-  top: 15px;
-
-}
-
-.name-field {
-  font-size: 20px;
-}
-
-.address-field {
-  font-size:13px;
-  font-weight: 200;
 }

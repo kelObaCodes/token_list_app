@@ -3,7 +3,7 @@ import {
     PaginationContainer,
     RightPaginationButton,
     LeftPaginationButton,
-} from "./styles/paginationStyles";
+} from "./styles/PaginationStyle";
 
 interface PaginationProps {
     currentPage: number;
