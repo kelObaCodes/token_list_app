@@ -19,7 +19,7 @@ const usePagination = (tokens: Token[], tokensPerPage: number) => {
         setCurrentPage(page);
     };
 
-    return { currentPage, totalPages, currentTokens, handlePageChange };
+    return { currentPage, totalPages, currentTokens, setCurrentPage, handlePageChange };
 };
 
 export default usePagination;
