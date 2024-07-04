@@ -7,38 +7,70 @@ import SearchBar from "./SearchInput";
 import TokenList from "./TokenList";
 import Pagination from "./Pagination";
 import CustomNotification from "./CustomNotification";
+import Tabs from "./Tabs";
+import { useRouter } from "next/router";
 
 interface OverviewPageProps {
     tokens: Token[];
 }
 
 const Overview: React.FC<OverviewPageProps> = ({ tokens }) => {
+    const router = useRouter();
     const tokensPerPage = 50;
     const [notificationMessage, setNotificationMessage] = useState<string>("");
     const [notificationKey, setNotificationKey] = useState<string>("");
+    const [currentTab, setCurrentTab] = useState<"all" | "favorites">("all");
+    const { favorites, handleToggleFavorite } = useFavorites(
+        (message: string) => {
+            setNotificationMessage(message);
+            setNotificationKey(Date.now().toString());
+        }
+    );
+    const { searchTerm, setSearchTerm, filteredTokens } = useSearchTokens(
+        tokens,
+        currentTab,
+        favorites
+    );
 
-    const { searchTerm, setSearchTerm, filteredTokens } = useSearchTokens(tokens);
-    const { currentPage, totalPages, currentTokens, handlePageChange } = usePagination(filteredTokens, tokensPerPage);
-    const { favorites, handleToggleFavorite } = useFavorites((message: string,) => {
-        setNotificationMessage(message);
-        setNotificationKey(Date.now().toString());
-    });
+    const { currentPage, totalPages, currentTokens, handlePageChange } =
+        usePagination(filteredTokens, tokensPerPage);
 
     useEffect(() => {
-        handlePageChange(1);
-    }, [searchTerm]);
+
+            setSearchTerm("");
+            const { search, ...rest } = router.query;
+            router.push(
+                {
+                    pathname: router.pathname,
+                    query: "",
+                },
+                undefined,
+                { shallow: true }
+            );
+   
+    }, [currentTab]);
 
     const sortedTokens = [...currentTokens].sort((a, b) => {
-        if (favorites.includes(a.address) && !favorites.includes(b.address)) return -1;
-        if (!favorites.includes(a.address) && favorites.includes(b.address)) return 1;
+        if (favorites.includes(a.address) && !favorites.includes(b.address))
+            return -1;
+        if (!favorites.includes(a.address) && favorites.includes(b.address))
+            return 1;
         return 0;
     });
+
+    const handleTabChange = (tab: "all" | "favorites") => {
+        setCurrentTab(tab);
+    };
 
     return (
         <div>
             <h1>Token Information</h1>
             <SearchBar searchTerm={searchTerm} setSearchTerm={setSearchTerm} />
-            <CustomNotification message={notificationMessage} keyProp={notificationKey} />
+            <Tabs currentTab={currentTab} handleTabChange={handleTabChange} />
+            <CustomNotification
+                message={notificationMessage}
+                keyProp={notificationKey}
+            />
             <TokenList
                 tokens={sortedTokens}
                 favorites={favorites}

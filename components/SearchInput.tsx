@@ -16,7 +16,7 @@ const SearchBar: React.FC<SearchBarProps> = ({ searchTerm, setSearchTerm }) => {
     const router = useRouter();
 
     useEffect(() => {
-        //start search term from the URL if present
+        // Start search term from the URL if present
         const initialSearchTerm = router.query.search || "";
         setSearchTerm(initialSearchTerm as string);
 
@@ -36,7 +36,7 @@ const SearchBar: React.FC<SearchBarProps> = ({ searchTerm, setSearchTerm }) => {
         setSearchTerm(newSearchTerm);
 
         if (newSearchTerm) {
-            // this will update the URL with the new search term
+            // This will update the URL with the new search term
             router.push(
                 {
                     pathname: router.pathname,
@@ -46,15 +46,8 @@ const SearchBar: React.FC<SearchBarProps> = ({ searchTerm, setSearchTerm }) => {
                 { shallow: true }
             );
         } else {
-            const { search, ...rest } = router.query;
-            router.push(
-                {
-                    pathname: router.pathname,
-                    query: rest,
-                },
-                undefined,
-                { shallow: true }
-            );
+            // Clear the search parameter from the URL when search term is empty
+            handleClearSearch();
         }
     };
 
