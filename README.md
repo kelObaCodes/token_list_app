@@ -133,7 +133,7 @@ Allows users to mark/unmark tokens as favorites, persisting favorites in localSt
 + **Routing:** Leverages next/router for client-side routing and managing URL query parameters (search and page).
 
 **1. Overview (Overview.tsx)**
-Purpose: Main page component that displays a list of tokens with search and pagination functionality.
++ Purpose: Main page component that displays a list of tokens with search and pagination functionality.
 
 **Hooks:**
 + useSearchTokens: Manages the search functionality.
@@ -202,6 +202,8 @@ Purpose: Main page component that displays a list of tokens with search and pagi
 + Challenge: Efficiently filtering and paginating a potentially large list of tokens.
 + Solution: Custom hooks (useSearchTokens and usePagination) to handle these functionalities efficiently.
 
-**4. State Synchronization:** Ensuring consistent state across components (e.g., SearchBar, Pagination, Tabs) to reflect changes in UI and URL. Achieved using useEffect and updating state based on URL query parameters.
+**4. State Synchronization:** 
++ Ensuring consistent state across components (e.g., SearchBar, Pagination, Tabs) to reflect changes in UI and URL. Achieved using useEffect and updating state based on URL query parameters.
 
-**5. Performance:** Optimizing rendering performance with large datasets using pagination and conditional rendering with AnimatePresence for smooth animations.
+**5. Performance:** 
++ Optimizing rendering performance with large datasets using pagination and conditional rendering with AnimatePresence for smooth animations.
