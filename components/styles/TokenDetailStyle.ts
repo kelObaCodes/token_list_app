@@ -50,19 +50,19 @@ export const FavoriteButton = styled.button`
         outline: none;
     }
 
-    &:hover .proceed-btn,
+    &:hover .inactive-btn,
     &:hover .is-fav-hover {
         transform: translateY(-8px);
     }
 
-    &:active .proceed-btn {
+    &:active .inactive-btn {
         transform: translateY(-3px);
     }
     &:active .is-fav-hover {
         transform: translateY(-3px);
     }
 
-    .proceed-btn,
+    .inactive-btn,
     .is-fav-hover {
         display: block;
         padding: 12px 42px;
@@ -84,43 +84,5 @@ export const FavoriteButton = styled.button`
     &.is-fav {
         background-color: ${colors.liFiLightColor};
     }
-    /* display: block;
-  padding: 12px 42px;
-  border-radius: 12px;
-  font-size: 15px;
-  color: white;
-  background:blue;
-  transform: translateY(-4px);
-  cursor: pointer;
 
-  .pushable:focus:not(:focus-visible) {
-  outline: none;
-}
-
-.proceed-btn {
-  will-change: transform;
-  transition: transform 250ms;
-}
-
-.pushable:hover .proceed-btn {
-  transform: translateY(-6px);
-}
-
-.pushable:active .proceed-btn {
-  transform: translateY(-2px);
-} */
-    /* padding: 10px 20px;
-    margin-top: 20px;
-    cursor: pointer;
-    border: none;
-    border-radius: 5px;
-    background-color: ${colors.white};
-    color: ${colors.black};
-    transition: background-color 0.3s;
-    &.is-fav {
-        background-color: ${colors.liFiThemeColor};
-    }
-    &:hover {
-        background-color: ${colors.liFiLightColor};
-    } */
 `;

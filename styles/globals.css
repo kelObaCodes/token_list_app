@@ -24,37 +24,6 @@ a {
   grid-column-gap: 1rem;
   grid-row-gap: 1rem;
   margin-top: 1rem;
+  margin-bottom: 5%;
 }
 
-.pushable {
-  background:#1F8A70;
-  border: none;
-  border-radius: 12px;
-  padding: 0;
-  cursor: pointer;
-}
-.proceed-btn {
-  display: block;
-  padding: 12px 42px;
-  border-radius: 12px;
-  font-size: 15px;
-  color: white;
-  transform: translateY(-4px);
-}
-
-.pushable:focus:not(:focus-visible) {
-  outline: none;
-}
-
-.proceed-btn {
-  will-change: transform;
-  transition: transform 250ms;
-}
-
-.pushable:hover .proceed-btn {
-  transform: translateY(-6px);
-}
-
-.pushable:active .proceed-btn {
-  transform: translateY(-2px);
-}

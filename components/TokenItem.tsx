@@ -21,12 +21,10 @@ const TokenItem: React.FC<TokenItemProps> = ({
     toggleFavorite,
 }) => (
     <TokenItemWrapper
-        animate={{
-            scale: [1, 1.5, 1],
-        }}
-        exit={{ opacity: 1 }}
-        initial={{ opacity: 1 }}
-        transition={{ duration: 0.3 }}
+        animate={{ opacity: 1, scale: 1 }}
+        exit={{ opacity: 0 }}
+        initial={{ opacity: 0, scale: 0.5 }}
+        transition={{ duration: 0.5 }}
         layout
         whileTap={{ scale: 0.9 }}
     >
@@ -45,7 +43,8 @@ const TokenItem: React.FC<TokenItemProps> = ({
             onClick={() => toggleFavorite(token.address, token.name)}
             className={`material-symbols-outlined ${
                 isfavorite ? "is-fav" : ""
-            }`}>
+            }`}
+        >
             favorite
         </FavoriteIcon>
     </TokenItemWrapper>

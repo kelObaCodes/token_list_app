@@ -64,7 +64,7 @@ const TokenDetail: React.FC<TokenDetailPageProps> = ({ token }) => {
             >
                 <span 
                  className={` ${
-                    isfavorite ? "is-fav-hover" : "proceed-btn"
+                    isfavorite ? "is-fav-hover" : "inactive-btn"
                 }`}>  {isfavorite ? "remove as favorite" : "add as favorite"}</span>
               
             </FavoriteButton>

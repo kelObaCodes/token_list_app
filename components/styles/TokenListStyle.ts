@@ -1,7 +1,5 @@
 import styled from "styled-components";
 
-import { colors, borderRadius, borderColor } from "./mixins";
-
 export const NoTokens = styled.div`
    display: flex;
    height: 60vh;
