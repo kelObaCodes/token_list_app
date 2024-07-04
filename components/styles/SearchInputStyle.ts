@@ -1,5 +1,10 @@
 import styled from "styled-components";
-import { colors, borderRadius, transparentBorder, thickBoxShadow } from "./mixins";
+import {
+    colors,
+    borderRadius,
+    transparentBorder,
+    thickBoxShadow,
+} from "./mixins";
 
 export const InputCover = styled.div`
     position: -webkit-sticky;
@@ -16,7 +21,6 @@ export const SearchInput = styled.input`
     ${transparentBorder}
     ${borderRadius}
 
-    padding: 10px;
     background: ${colors.white};
     outline: none;
     outline: none;

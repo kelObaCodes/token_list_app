@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from "react";
+import React, { useState } from "react";
 import { Token } from "../utils/tokenInterface";
 import useSearchTokens from "../hooks/useSearchTokens";
 import usePagination from "../hooks/usePagination";
@@ -8,16 +8,12 @@ import TokenList from "./TokenList";
 import Pagination from "./Pagination";
 import CustomNotification from "./CustomNotification";
 import Tabs from "./Tabs";
-import { useRouter } from "next/router";
-import {
-    TokenContainer
-} from "./styles/OverviewStyle";
+import { TokenContainer, HeaderText } from "./styles/OverviewStyle";
 interface OverviewPageProps {
     tokens: Token[];
 }
 
 const Overview: React.FC<OverviewPageProps> = ({ tokens }) => {
-    const router = useRouter();
     const tokensPerPage = 50;
     const [notificationMessage, setNotificationMessage] = useState<string>("");
     const [notificationKey, setNotificationKey] = useState<string>("");
@@ -37,21 +33,6 @@ const Overview: React.FC<OverviewPageProps> = ({ tokens }) => {
     const { currentPage, totalPages, currentTokens, handlePageChange } =
         usePagination(filteredTokens, tokensPerPage);
 
-    useEffect(() => {
-
-            setSearchTerm("");
-            const { search, ...rest } = router.query;
-            router.push(
-                {
-                    pathname: router.pathname,
-                    query: "",
-                },
-                undefined,
-                { shallow: true }
-            );
-   
-    }, [currentTab]);
-
     const sortedTokens = [...currentTokens].sort((a, b) => {
         if (favorites.includes(a.address) && !favorites.includes(b.address))
             return -1;
@@ -66,9 +47,13 @@ const Overview: React.FC<OverviewPageProps> = ({ tokens }) => {
 
     return (
         <TokenContainer>
-            <h1>LI.Fi Tokens</h1>
+            <HeaderText>LI.Fi Tokens</HeaderText>
             <SearchBar searchTerm={searchTerm} setSearchTerm={setSearchTerm} />
-            <Tabs currentTab={currentTab} handleTabChange={handleTabChange} />
+            <Tabs
+                currentTab={currentTab}
+                handleTabChange={handleTabChange}
+                setSearchTerm={setSearchTerm}
+            />
             <CustomNotification
                 message={notificationMessage}
                 keyProp={notificationKey}

@@ -14,18 +14,18 @@ const TokenList: React.FC<TokenListProps> = ({
     favorites,
     toggleFavorite,
 }) => (
-    <motion.div layout className="token-list">
-        <AnimatePresence>
+    <AnimatePresence mode="wait" initial={false}>
+        <motion.div layout className="token-list">
             {tokens.map((token, index) => (
                 <TokenItem
                     token={token}
-                    isFavorite={favorites.includes(token.address)}
+                    isfavorite={favorites.includes(token.address)}
                     toggleFavorite={toggleFavorite}
                     key={`${token.address}-${index}`}
                 />
             ))}
-        </AnimatePresence>
-    </motion.div>
+        </motion.div>
+    </AnimatePresence>
 );
 
 export default TokenList;

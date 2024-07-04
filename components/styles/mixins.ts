@@ -4,9 +4,10 @@ const colors = {
     white: "#FFFFFF",
     black: "#000",
     liFiThemeColor: "#f5b5ff",
-    grey: "#f4f2f2",
+    liFiLightColor: "#f2e0f4",
     shadowColor: "#00000005",
     borderCol: "#E6E6E6",
+    grey: "#f2f2f2"
 };
 
 const boxShadow = css`
@@ -32,7 +33,8 @@ const transparentBorder = css`
 `;
 
 const backgroundStyle = css`
-    padding: 5% 20%;
+    min-height: 100vh;
+    padding: 5% 20% 0 20%;
     background: linear-gradient(
             rgba(234, 243, 246, 0.95),
             rgba(234, 243, 246, 0.95)
@@ -43,6 +45,11 @@ const backgroundStyle = css`
 
     .material-symbols-outlined {
         font-variation-settings: "FILL" 1, "wght" 300, "GRAD" 0, "opsz" 24;
+    }
+
+    @media (max-width: 1200px) {
+        font-size: 18px;
+        padding: 5% 5% 0 5%;
     }
 `;
 

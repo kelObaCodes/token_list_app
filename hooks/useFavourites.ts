@@ -9,7 +9,7 @@ const useFavorites = (setNotificationMessage: (message: string) => void) => {
 
         if (favorites.includes(tokenAddress)) {
             updatedFavorites = favorites.filter((fav) => fav !== tokenAddress);
-            message = `${TokenName} Removed from your favorites`;
+            message = `${TokenName} removed from your favorites`;
         } else {
             updatedFavorites = [...favorites, tokenAddress];
             message = `${TokenName} Added to your favorites`;

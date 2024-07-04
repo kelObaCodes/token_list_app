@@ -1,9 +1,9 @@
 import styled from "styled-components";
 import { motion } from "framer-motion";
-import { colors, boxShadow  } from "./mixins";
+import { colors, boxShadow } from "./mixins";
 
 export const TokenItemWrapper = styled(motion.div)`
-${boxShadow}
+    ${boxShadow}
     text-align: center;
     border-radius: 5px;
     transition: 0.8s;
@@ -15,7 +15,7 @@ ${boxShadow}
 
     &:hover {
         transition: 0.8s;
-        background-color: ${colors.grey};
+        background-color: ${colors.liFiLightColor};
         box-shadow: rgba(100, 100, 111, 0.2) 0px 0px 0px;
         cursor: pointer;
     }
@@ -38,10 +38,13 @@ export const TokenAddress = styled.p`
     word-wrap: break-word;
 `;
 
-export const FavoriteIcon = styled.span<{ isFavorite: boolean }>`
+export const FavoriteIcon = styled.span`
     position: absolute;
     top: 10px;
     right: 10px;
     cursor: pointer;
-    color: ${(props) => (props.isFavorite ? colors.liFiThemeColor : colors.grey)};
+    color: ${colors.grey};
+    &.is-fav {
+        color: ${colors.liFiThemeColor};
+    }
 `;

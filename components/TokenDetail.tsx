@@ -6,6 +6,7 @@ import {
     TokenName,
     TokenInfo,
     FavoriteButton,
+    TokenTitle,
 } from "./styles/TokenDetailStyle";
 
 interface TokenDetailPageProps {
@@ -13,7 +14,7 @@ interface TokenDetailPageProps {
 }
 
 const TokenDetail: React.FC<TokenDetailPageProps> = ({ token }) => {
-    const [isFavorite, setIsFavorite] = useState(false);
+    const [isfavorite, setIsFavorite] = useState(false);
 
     useEffect(() => {
         const favorites = JSON.parse(localStorage.getItem("favorites") || "[]");
@@ -41,16 +42,23 @@ const TokenDetail: React.FC<TokenDetailPageProps> = ({ token }) => {
         <TokenDetailWrapper>
             <TokenName>{token.name}</TokenName>
             <TokenImage src={token.logoURI} alt={token.name} />
-            <TokenInfo>Address: {token.address}</TokenInfo>
-            <TokenInfo>Chain Id: {token.chainId}</TokenInfo>
-            <TokenInfo>Price: {token.priceUSD}$</TokenInfo>
-            <TokenInfo>Decimal: {token.decimals}</TokenInfo>
-            <TokenInfo>Key: {token.coinKey}</TokenInfo>
+            <TokenTitle> Address: </TokenTitle>
+            <TokenInfo>{token.address}</TokenInfo>
+            <TokenTitle> Chain Id: </TokenTitle>
+            <TokenInfo> {token.chainId}</TokenInfo>
+            <TokenTitle> Price: </TokenTitle>
+            <TokenInfo>{token.priceUSD}$</TokenInfo>
+            <TokenTitle> Decimal: </TokenTitle>
+            <TokenInfo> {token.decimals}</TokenInfo>
+            <TokenTitle> Key: </TokenTitle>
+            <TokenInfo>{token.coinKey}</TokenInfo>
             <FavoriteButton
                 onClick={handleFavoriteClick}
-                isFavorite={isFavorite}
+                className={`${
+                    isfavorite ? "is-fav" : ""
+                }`}
             >
-                {isFavorite ? "Unmark Favorite" : "Mark as Favorite"}
+                {isfavorite ? "Unmark Favorite" : "Mark as Favorite"}
             </FavoriteButton>
         </TokenDetailWrapper>
     );

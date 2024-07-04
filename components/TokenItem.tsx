@@ -11,28 +11,31 @@ import {
 
 interface TokenItemProps {
     token: Token;
-    isFavorite: boolean;
+    isfavorite: boolean;
     toggleFavorite: (tokenAddress: string, tokenName: string) => void;
 }
 
 const TokenItem: React.FC<TokenItemProps> = ({
     token,
-    isFavorite,
+    isfavorite,
     toggleFavorite,
 }) => (
     <TokenItemWrapper
-        animate={{ opacity: 1 }}
-        exit={{ opacity: 0}}
+        animate={{
+            scale: [1, 1.5, 1],
+        }}
+        exit={{ opacity: 1 }}
         initial={{ opacity: 1 }}
-        transition={{ duration: .3 }}
+        transition={{ duration: 0.3 }}
         layout
+        whileTap={{ scale: 0.9 }}
     >
         <Link href={`/token/${token.chainId}/${token.address}`}>
-                {token.logoURI ? (
-                    <TokenImage src={token.logoURI} alt={token.name} />
-                ) : (
-                    <TokenImage src="/bitcoin-logo.png" alt={token.name} />
-                )}
+            {token.logoURI ? (
+                <TokenImage src={token.logoURI} alt={token.name} />
+            ) : (
+                <TokenImage src="/bitcoin-logo.png" alt={token.name} />
+            )}
             <TokenName>
                 {token.name} ({token.symbol})
             </TokenName>
@@ -40,9 +43,9 @@ const TokenItem: React.FC<TokenItemProps> = ({
         </Link>
         <FavoriteIcon
             onClick={() => toggleFavorite(token.address, token.name)}
-            isFavorite={isFavorite}
-            className="material-symbols-outlined cursor-pointer"
-        >
+            className={`material-symbols-outlined ${
+                isfavorite ? "is-fav" : ""
+            }`}>
             favorite
         </FavoriteIcon>
     </TokenItemWrapper>

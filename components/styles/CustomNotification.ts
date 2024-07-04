@@ -24,14 +24,17 @@ const fadeOut = keyframes`
 `;
 
 export const NotificationContainer = styled.div<{ visible: boolean }>`
-${boxShadow}
+    ${boxShadow}
     position: fixed;
     top: 20px;
     right: 20px;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
     background-color: ${colors.liFiThemeColor};
     color: ${colors.black};
     padding: 10px 20px;
     border-radius: 5px;
-    z-index: 100;
+    z-index: 1000;
     animation: ${({ visible }) => (visible ? fadeIn : fadeOut)} 0.5s forwards;
 `;
