@@ -50,7 +50,7 @@ You can start editing the page by modifying `pages/index.tsx`. The page auto-upd
 
 
 
-## Documentation: Token Management React Application with SSR, SSG, and ISR
+## Documentation: Token Management Next.js Application with SSR, SSG, and ISR
 
 **Overview**
 This React application leverages Next.js's powerful data fetching methods to enhance performance and user experience. Specifically, it uses Server-Side Rendering (SSR), Static Site Generation (SSG), and Incremental Static Regeneration (ISR) to fetch and display token data efficiently.
@@ -61,11 +61,10 @@ This React application leverages Next.js's powerful data fetching methods to enh
 + Incremental Static Regeneration (ISR)
 
 **Home Page**
-File: pages/index.tsx
-Purpose: Displays an overview of all tokens.
++ File: pages/index.tsx
++ Purpose: Displays an overview of all tokens, search and pagination components.
 
-## Implementation:
-
+**Implementation:**
 Uses SSR to fetch the list of tokens on each request, ensuring that the data is always up-to-date.
 
 **Technical Details:**
@@ -74,7 +73,7 @@ Uses SSR to fetch the list of tokens on each request, ensuring that the data is 
 
 
 **SSG, and ISR Implementations**
-Token Detail Page
++ Token Detail Page
 File: TokenDetail.tsx
 
 **Functionality:**
@@ -95,35 +94,45 @@ Allows users to mark/unmark tokens as favorites, persisting favorites in localSt
 
 
 **Additional Files and Their Usage**
-Mixins and Styling
-File: mixins.ts
-Purpose: Defines reusable CSS styles and constants for consistent styling across components.
-Content: Includes color definitions, box shadow styles, text sizes, border styles, and background styles.
++ Mixins and Styling
++ File: mixins.ts
++ Purpose: Defines reusable CSS styles and constants for consistent styling across components.
++ Content: Includes color definitions, box shadow styles, text sizes, border styles, and background styles.
 
 ## API Calls
-File: api.ts
-Purpose: Defines functions to fetch token data from the backend API.
-Content:
-fetchTokens: Fetches a list of all tokens.
-fetchTokenDetails: Fetches detailed information for a specific token based on its chainId and address.
++ File: api.ts
++ Purpose: Defines functions to fetch token data from the backend API.
++ Content:
++ fetchTokens: Fetches a list of all tokens.
++ fetchTokenDetails: Fetches detailed information for a specific token based on its chainId and address.
 
 
 ## Token Interface
-File: tokenInterface.ts
-Purpose: Defines TypeScript interfaces for the token data structures.
-Content:
-Token: Represents a token with properties like chainId, address, symbol, name, decimals, priceUSD, coinKey, and logoURI.
-TokenListProps: Represents properties for a component that lists tokens.
-TokenResponse: Represents the response structure from the API containing tokens.
++ File: tokenInterface.ts
++ Purpose: Defines TypeScript interfaces for the token data structures.
++ Content:
++ Token: Represents a token with properties like chainId, address, symbol, name, decimals, priceUSD, coinKey, and logoURI.
++ TokenListProps: Represents properties for a component that lists tokens.
++ TokenResponse: Represents the response structure from the API containing tokens.
 
 
 
 ------------------------------------------------------------------------------------------------------------
 ## Component Architecture and Design Decisions
 
-Main Components
+**Summary**
 
-**1.Overview**
++ **Component-Based Architecture:** Each component is designed to handle a specific piece of functionality, making the codebase modular and maintainable.
+
++ **Custom Hooks:** Encapsulate complex logic (e.g., managing favorites, pagination, searching) to promote code reuse and separation of concerns.
+
++ **State Management:** Uses local state (useState) and side effects (useEffect) to manage component-level state and synchronize state with URL query parameters.
+
++ **Styling:** Utilizes styled-components for styling, allowing for CSS-in-JS and scoped styles. Mixins are used for consistent styling across components.
+
++ **Routing:** Leverages next/router for client-side routing and managing URL query parameters (search and page).
+
+**1. Overview (Overview.tsx)**
 Purpose: Main page component that displays a list of tokens with search and pagination functionality.
 
 **Hooks:**
@@ -131,24 +140,52 @@ Purpose: Main page component that displays a list of tokens with search and pagi
 + usePagination: Manages pagination.
 + useFavorites: Manages favorite tokens.
 
+**2. Pagination Component (Pagination.tsx):**
++ Purpose: Provides pagination controls.
++ Functionality:
++ Reads current page from URL query parameters and updates it accordingly.
++ Allows navigation between pages with Next and Previous buttons.
++ Uses next/router for URL manipulation.
 
-**Sub-components:**
-+ SearchBar: Component for the search input.
-+ TokenList: Component to display a list of tokens.
-+ Pagination: Component to handle page navigation.
-+ CustomNotification: Component to display notifications.
-+ Tabs: Component to switch between "all tokens" and "favorites".
+**3. SearchBar Component (SearchInput.tsx):**
++ Purpose: Provides a search input field.
++ Functionality:
++ Initializes search term from URL query parameters.
++ Updates URL query parameters as the search term changes.
++ Handles clearing search term and URL query parameters.
 
-**2. TokenDetail**
+**4. TokenDetail (TokenDetail.tsx)**
 + Purpose: Displays detailed information about a specific token.
 + State Management: Uses local state to manage favorite status.
 + Local Storage: Uses localStorage to persist favorite tokens across sessions.
 
-**3. TokenItem**
+**5. TokenItem (TokenItem.tsx)**
 + Purpose: Represents an individual token in the list.
 + Props: Receives token data, favorite status, and a toggle favorite function.
 + Styling and Animation: Uses styled-components and framer-motion for styling and animations.
 
+
+**6. TokenList Component (TokenList.tsx):**
++ Purpose: Lists all tokens or filtered tokens based on search and tab selection.
++ Functionality:
++ Maps through tokens and renders TokenItem for each token.
++ Utilizes AnimatePresence from framer-motion for smooth animations.
+
+**7. TokenDetail Component (TokenDetail.tsx):**
++ Purpose: Displays detailed information about a specific token.
++ Functionality:
++ Retrieves token details (name, symbol, address, chainId, priceUSD, decimals, coinKey, logoURI).
++ Allows users to mark/unmark tokens as favorites, persisting favorites in localStorage.
+
+**8. Tabs Component (Tabs.tsx):**
++ Purpose: Renders tabs for All Tokens and Favorites.
++ Functionality:
++ Switches between tabs (all and favorites) and updates state in Overview component.
+
+**8. CustomNotification Component (CustomNotification.tsx):**
++ Purpose: Shows notifications for actions like adding/removing tokens from favorites.
++ Functionality:
++ Controls visibility and duration of notifications using state and useEffect.
 ------------------------------------------------------------------------------------------------------------
 
 **Challenges and Solutions**
@@ -159,8 +196,12 @@ Purpose: Main page component that displays a list of tokens with search and pagi
 
 **2. Managing Favorites:**
 + Challenge: Persisting favorite tokens across sessions.
-+ Solution: Using localStorage to save favorite tokens and updating the state accordingly.
++ Solution: Using localStorage to save favorite tokens and updating the state accordingly, i didn't see the need to use a state library like zustand or redux because the app is not so big but this can be easily be achieved.
 
-**3.Search and Pagination:**
+**3. Search and Pagination:**
 + Challenge: Efficiently filtering and paginating a potentially large list of tokens.
 + Solution: Custom hooks (useSearchTokens and usePagination) to handle these functionalities efficiently.
+
+**4. State Synchronization:** Ensuring consistent state across components (e.g., SearchBar, Pagination, Tabs) to reflect changes in UI and URL. Achieved using useEffect and updating state based on URL query parameters.
+
+**5. Performance:** Optimizing rendering performance with large datasets using pagination and conditional rendering with AnimatePresence for smooth animations.

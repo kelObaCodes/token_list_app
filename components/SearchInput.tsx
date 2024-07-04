@@ -68,7 +68,7 @@ const SearchBar: React.FC<SearchBarProps> = ({ searchTerm, setSearchTerm }) => {
         <InputCover>
             <SearchInput
                 type="text"
-                placeholder="Search for Tokens"
+                placeholder="Search for tokens"
                 value={searchTerm}
                 onChange={handleInputChange}
             />
