@@ -1,23 +1,21 @@
 import styled from "styled-components";
 import { motion } from "framer-motion";
+import { colors, boxShadow, pTagtextSize } from "./mixins";
 
 export const TokenItemWrapper = styled(motion.div)`
+    ${boxShadow}
     text-align: center;
-    border: 1px solid transparent;
     border-radius: 5px;
     transition: 0.8s;
-    background-color: #fff;
+    background-color: ${colors.white};
     border: 1px solid #f0f2f3;
-    box-shadow: rgba(100, 100, 111, 0.2) 0px 7px 29px;
-    border: 1px solid #f0f2f3;
-    box-shadow: 0 1px 6px #00000005;
     box-sizing: border-box;
     position: relative;
     padding: 20px;
 
     &:hover {
         transition: 0.8s;
-        background-color: #f8f8f8;
+        background-color: ${colors.liFiLightColor};
         box-shadow: rgba(100, 100, 111, 0.2) 0px 0px 0px;
         cursor: pointer;
     }
@@ -36,14 +34,18 @@ export const TokenName = styled.h3`
 `;
 
 export const TokenAddress = styled.p`
-    color: #666;
+${pTagtextSize}
+    color: ${colors.black};
     word-wrap: break-word;
 `;
 
-export const FavoriteIcon = styled.span<{ isFavorite: boolean }>`
+export const FavoriteIcon = styled.span`
     position: absolute;
     top: 10px;
     right: 10px;
     cursor: pointer;
-    color: ${(props) => (props.isFavorite ? "#f5b5ff" : "gray")};
+    color: ${colors.grey};
+    &.is-fav {
+        color: ${colors.liFiThemeColor};
+    }
 `;

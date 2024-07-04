@@ -6,6 +6,7 @@ import {
     TokenName,
     TokenInfo,
     FavoriteButton,
+    TokenTitle,
 } from "./styles/TokenDetailStyle";
 
 interface TokenDetailPageProps {
@@ -13,7 +14,7 @@ interface TokenDetailPageProps {
 }
 
 const TokenDetail: React.FC<TokenDetailPageProps> = ({ token }) => {
-    const [isFavorite, setIsFavorite] = useState(false);
+    const [isfavorite, setIsFavorite] = useState(false);
 
     useEffect(() => {
         const favorites = JSON.parse(localStorage.getItem("favorites") || "[]");
@@ -40,17 +41,32 @@ const TokenDetail: React.FC<TokenDetailPageProps> = ({ token }) => {
     return (
         <TokenDetailWrapper>
             <TokenName>{token.name}</TokenName>
-            <TokenImage src={token.logoURI} alt={token.name} />
-            <TokenInfo>Address: {token.address}</TokenInfo>
-            <TokenInfo>Chain Id: {token.chainId}</TokenInfo>
-            <TokenInfo>Price: {token.priceUSD}$</TokenInfo>
-            <TokenInfo>Decimal: {token.decimals}</TokenInfo>
-            <TokenInfo>Key: {token.coinKey}</TokenInfo>
+            {token.logoURI ? (
+                <TokenImage src={token.logoURI} alt={token.name} />
+            ) : (
+                <TokenImage src="/images/bitcoin-logo.png" alt={token.name} />
+            )}
+            <TokenTitle> Address: </TokenTitle>
+            <TokenInfo>{token.address}</TokenInfo>
+            <TokenTitle> Chain Id: </TokenTitle>
+            <TokenInfo> {token.chainId}</TokenInfo>
+            <TokenTitle> Price: </TokenTitle>
+            <TokenInfo>{token.priceUSD}$</TokenInfo>
+            <TokenTitle> Decimal: </TokenTitle>
+            <TokenInfo> {token.decimals}</TokenInfo>
+            <TokenTitle> Key: </TokenTitle>
+            <TokenInfo>{token.coinKey}</TokenInfo>
             <FavoriteButton
                 onClick={handleFavoriteClick}
-                isFavorite={isFavorite}
+                className={`pushable ${
+                    isfavorite ? "is-fav" : ""
+                }`}
             >
-                {isFavorite ? "Unmark Favorite" : "Mark as Favorite"}
+                <span 
+                 className={` ${
+                    isfavorite ? "is-fav-hover" : "inactive-btn"
+                }`}>  {isfavorite ? "remove as favorite" : "add as favorite"}</span>
+              
             </FavoriteButton>
         </TokenDetailWrapper>
     );

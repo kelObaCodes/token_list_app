@@ -1,5 +1,10 @@
-
-import styled from 'styled-components';
+import styled from "styled-components";
+import {
+    colors,
+    borderRadius,
+    transparentBorder,
+    thickBoxShadow,
+} from "./mixins";
 
 export const InputCover = styled.div`
     position: -webkit-sticky;
@@ -12,12 +17,12 @@ export const InputCover = styled.div`
 `;
 
 export const SearchInput = styled.input`
-    padding: 10px;
-    background: #fff;
-    border: 1px solid transparent;
+    ${thickBoxShadow}
+    ${transparentBorder}
+    ${borderRadius}
+
+    background: ${colors.white};
     outline: none;
-    box-shadow: rgba(100, 100, 111, 0.2) 0px 7px 29px;
-    border-radius: 5px;
     outline: none;
     width: 100%;
     height: 45px;
@@ -27,8 +32,6 @@ export const SearchInput = styled.input`
 export const ClearSearch = styled.span`
     margin-left: 10px;
     cursor: pointer;
-    font-weight: bold;
-    color: #333;
     position: absolute;
     right: 12px;
     top: 10px;
@@ -36,8 +39,6 @@ export const ClearSearch = styled.span`
 export const SearchIcon = styled.span`
     margin-left: 10px;
     cursor: pointer;
-    font-weight: bold;
-    color: #333;
     position: absolute;
     top: 10px;
 `;
