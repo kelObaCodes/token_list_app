@@ -22,19 +22,17 @@ const TokenItem: React.FC<TokenItemProps> = ({
 }) => (
     <TokenItemWrapper
         animate={{ opacity: 1 }}
-        exit={{ opacity: 0 }}
+        exit={{ opacity: 0}}
         initial={{ opacity: 1 }}
         transition={{ duration: .3 }}
         layout
     >
         <Link href={`/token/${token.chainId}/${token.address}`}>
-            <div>
                 {token.logoURI ? (
                     <TokenImage src={token.logoURI} alt={token.name} />
                 ) : (
                     <TokenImage src="/bitcoin-logo.png" alt={token.name} />
                 )}
-            </div>
             <TokenName>
                 {token.name} ({token.symbol})
             </TokenName>

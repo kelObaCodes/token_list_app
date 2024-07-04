@@ -1,4 +1,5 @@
 import styled, { keyframes } from "styled-components";
+import { colors, boxShadow } from "./mixins";
 
 const fadeIn = keyframes`
     from {
@@ -23,14 +24,14 @@ const fadeOut = keyframes`
 `;
 
 export const NotificationContainer = styled.div<{ visible: boolean }>`
+${boxShadow}
     position: fixed;
     top: 20px;
     right: 20px;
-    background-color: #333;
-    color: #fff;
+    background-color: ${colors.liFiThemeColor};
+    color: ${colors.black};
     padding: 10px 20px;
     border-radius: 5px;
-    box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.1);
-    z-index: 1000;
+    z-index: 100;
     animation: ${({ visible }) => (visible ? fadeIn : fadeOut)} 0.5s forwards;
 `;

@@ -1,4 +1,5 @@
 import styled from "styled-components";
+import { colors } from "./mixins";
 
 export const TabsContainer = styled.div`
     /* display: flex; */
@@ -12,7 +13,7 @@ export const TabButton = styled.button`
     margin: 10px 0;
     border: none;
     border-radius: 5px;
-    background-color: #fff;
+    background-color: ${colors.white};
     cursor: pointer;
     font-size: 16px;
     transition: background-color 0.3s, color 0.3s;
@@ -20,13 +21,13 @@ export const TabButton = styled.button`
         margin-left: 17px;
     }
     &.active {
-        background-color: #f5b5ff;
-        color: #000;
+        background-color: ${colors.liFiThemeColor};;
+        color: ${colors.black};
     }
   
 
     &:hover {
-        background-color: #e0e0e0;
+        background-color: ${colors.grey};
     }
 
     &:focus {

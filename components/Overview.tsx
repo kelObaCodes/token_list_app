@@ -9,7 +9,9 @@ import Pagination from "./Pagination";
 import CustomNotification from "./CustomNotification";
 import Tabs from "./Tabs";
 import { useRouter } from "next/router";
-
+import {
+    TokenContainer
+} from "./styles/OverviewStyle";
 interface OverviewPageProps {
     tokens: Token[];
 }
@@ -63,8 +65,8 @@ const Overview: React.FC<OverviewPageProps> = ({ tokens }) => {
     };
 
     return (
-        <div>
-            <h1>Token Information</h1>
+        <TokenContainer>
+            <h1>LI.Fi Tokens</h1>
             <SearchBar searchTerm={searchTerm} setSearchTerm={setSearchTerm} />
             <Tabs currentTab={currentTab} handleTabChange={handleTabChange} />
             <CustomNotification
@@ -83,7 +85,7 @@ const Overview: React.FC<OverviewPageProps> = ({ tokens }) => {
                     handlePageChange={handlePageChange}
                 />
             )}
-        </div>
+        </TokenContainer>
     );
 };
 
