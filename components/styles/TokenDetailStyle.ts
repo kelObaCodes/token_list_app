@@ -4,6 +4,8 @@ import {
     pTagtextSize,
     headerTagtextSize,
     backgroundStyle,
+    borderRadius,
+    mediumHeaderTagtextSize
 } from "./mixins";
 
 export const TokenDetailWrapper = styled.div`
@@ -23,7 +25,7 @@ export const TokenName = styled.h1`
 `;
 
 export const TokenTitle = styled.p`
-    ${pTagtextSize};
+    ${mediumHeaderTagtextSize};
     color: ${colors.black};
     font-weight: 600;
 `;
@@ -38,7 +40,76 @@ export const TokenInfo = styled.p`
 
 export const FavoriteButton = styled.button`
     ${pTagtextSize};
-    padding: 10px 20px;
+    ${borderRadius};
+    background: ${colors.liFiLightColor};
+    border: none;
+    padding: 0;
+    cursor: pointer;
+    font-weight: 600;
+    &:focus:not(:focus-visible) {
+        outline: none;
+    }
+
+    &:hover .proceed-btn,
+    &:hover .is-fav-hover {
+        transform: translateY(-8px);
+    }
+
+    &:active .proceed-btn {
+        transform: translateY(-3px);
+    }
+    &:active .is-fav-hover {
+        transform: translateY(-3px);
+    }
+
+    .proceed-btn,
+    .is-fav-hover {
+        display: block;
+        padding: 12px 42px;
+        ${borderRadius};
+        ${pTagtextSize};
+        color: ${colors.black};
+        background: ${colors.white};
+        transform: translateY(-6px);
+        will-change: transform;
+        transition: transform 250ms;
+        width: 230px;
+    }
+
+    .is-fav-hover {
+        padding: 12px 42px;
+        background: ${colors.liFiThemeColor};
+    }
+
+    &.is-fav {
+        background-color: ${colors.liFiLightColor};
+    }
+    /* display: block;
+  padding: 12px 42px;
+  border-radius: 12px;
+  font-size: 15px;
+  color: white;
+  background:blue;
+  transform: translateY(-4px);
+  cursor: pointer;
+
+  .pushable:focus:not(:focus-visible) {
+  outline: none;
+}
+
+.proceed-btn {
+  will-change: transform;
+  transition: transform 250ms;
+}
+
+.pushable:hover .proceed-btn {
+  transform: translateY(-6px);
+}
+
+.pushable:active .proceed-btn {
+  transform: translateY(-2px);
+} */
+    /* padding: 10px 20px;
     margin-top: 20px;
     cursor: pointer;
     border: none;
@@ -51,5 +122,5 @@ export const FavoriteButton = styled.button`
     }
     &:hover {
         background-color: ${colors.liFiLightColor};
-    }
+    } */
 `;

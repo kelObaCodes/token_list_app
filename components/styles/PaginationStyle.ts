@@ -14,6 +14,10 @@ export const PaginationContainer = styled.div`
     justify-content: center;
     align-items: center;
     z-index: 1000;
+
+    @media (max-width: 768px) {
+        font-size: 0.7rem;
+    }
 `;
 
 export const PaginationButton = styled.button`
@@ -34,6 +38,10 @@ export const PaginationButton = styled.button`
     &:hover {
         transition: 0.8s;
         background-color: ${colors.liFiLightColor};
+    }
+
+    @media (max-width: 768px) {
+        font-size: 0.7rem;
     }
 `;
 export const RightPaginationButton = styled(PaginationButton)`

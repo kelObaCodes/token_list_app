@@ -3,11 +3,11 @@ import { css } from "styled-components";
 const colors = {
     white: "#FFFFFF",
     black: "#000",
-    liFiThemeColor: "#f5b5ff",
-    liFiLightColor: "#f2e0f4",
+    liFiThemeColor: "#F5B5FF",
+    liFiLightColor: "#F2E0F4",
     shadowColor: "#00000005",
     borderCol: "#E6E6E6",
-    grey: "#f2f2f2"
+    grey: "#F2F2F2"
 };
 
 const boxShadow = css`
@@ -17,10 +17,17 @@ const thickBoxShadow = css`
     box-shadow: rgba(100, 100, 111, 0.2) 0px 7px 29px;
 `;
 const pTagtextSize = css`
-    font-size: 1em;
+    font-size: 0.9rem;
+    font-weight: 300;
+    @media (max-width: 768px) {
+        font-size: 0.8rem;
+    }
 `;
 const headerTagtextSize = css`
-    font-size: 2em;
+    font-size: 2rem;
+`;
+const mediumHeaderTagtextSize = css`
+    font-size: 1rem;
 `;
 const borderRadius = css`
     border-radius: 5px;
@@ -48,7 +55,6 @@ const backgroundStyle = css`
     }
 
     @media (max-width: 1200px) {
-        font-size: 18px;
         padding: 5% 5% 0 5%;
     }
 `;
@@ -63,4 +69,5 @@ export {
     borderColor,
     thickBoxShadow,
     transparentBorder,
+    mediumHeaderTagtextSize
 };

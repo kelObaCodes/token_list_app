@@ -1,6 +1,6 @@
 import styled from "styled-components";
 import { motion } from "framer-motion";
-import { colors, boxShadow } from "./mixins";
+import { colors, boxShadow, pTagtextSize } from "./mixins";
 
 export const TokenItemWrapper = styled(motion.div)`
     ${boxShadow}
@@ -34,6 +34,7 @@ export const TokenName = styled.h3`
 `;
 
 export const TokenAddress = styled.p`
+${pTagtextSize}
     color: ${colors.black};
     word-wrap: break-word;
 `;

@@ -58,11 +58,15 @@ const TokenDetail: React.FC<TokenDetailPageProps> = ({ token }) => {
             <TokenInfo>{token.coinKey}</TokenInfo>
             <FavoriteButton
                 onClick={handleFavoriteClick}
-                className={`${
+                className={`pushable ${
                     isfavorite ? "is-fav" : ""
                 }`}
             >
-                {isfavorite ? "Unmark Favorite" : "Mark as Favorite"}
+                <span 
+                 className={` ${
+                    isfavorite ? "is-fav-hover" : "proceed-btn"
+                }`}>  {isfavorite ? "remove as favorite" : "add as favorite"}</span>
+              
             </FavoriteButton>
         </TokenDetailWrapper>
     );

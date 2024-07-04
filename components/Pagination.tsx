@@ -45,7 +45,7 @@ const Pagination: React.FC<PaginationProps> = ({
                     <span className="material-symbols-outlined">
                         chevron_backward
                     </span>
-                    Previous
+                    Prev
                 </LeftPaginationButton>
             )}
             <span>
