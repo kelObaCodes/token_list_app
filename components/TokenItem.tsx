@@ -34,7 +34,7 @@ const TokenItem: React.FC<TokenItemProps> = ({
             {token.logoURI ? (
                 <TokenImage src={token.logoURI} alt={token.name} />
             ) : (
-                <TokenImage src="/bitcoin-logo.png" alt={token.name} />
+                <TokenImage src="/images/bitcoin-logo.png" alt={token.name} />
             )}
             <TokenName>
                 {token.name} ({token.symbol})

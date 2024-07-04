@@ -39,7 +39,7 @@ const backgroundStyle = css`
             rgba(234, 243, 246, 0.95),
             rgba(234, 243, 246, 0.95)
         ),
-        url("./checked.png");
+        url("./images/checked.png");
     background-size: contain;
     background-repeat: no-repeat;
 

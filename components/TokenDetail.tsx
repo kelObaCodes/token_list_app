@@ -41,7 +41,11 @@ const TokenDetail: React.FC<TokenDetailPageProps> = ({ token }) => {
     return (
         <TokenDetailWrapper>
             <TokenName>{token.name}</TokenName>
-            <TokenImage src={token.logoURI} alt={token.name} />
+            {token.logoURI ? (
+                <TokenImage src={token.logoURI} alt={token.name} />
+            ) : (
+                <TokenImage src="/images/bitcoin-logo.png" alt={token.name} />
+            )}
             <TokenTitle> Address: </TokenTitle>
             <TokenInfo>{token.address}</TokenInfo>
             <TokenTitle> Chain Id: </TokenTitle>
