@@ -5,6 +5,11 @@ This is a [Next.js](https://nextjs.org/) project bootstrapped with [`create-next
 First, run the development server:
 
 ```bash
+
+cd to project folder
+# then
+npm install (to add all dependencies)
+# then
 npm run dev
 # or
 yarn dev
@@ -53,7 +58,7 @@ You can start editing the page by modifying `pages/index.tsx`. The page auto-upd
 ## Documentation: Token Management Next.js Application with SSR, SSG, and ISR
 
 **Overview**
-This React application leverages Next.js's powerful data fetching methods to enhance performance and user experience. Specifically, it uses Server-Side Rendering (SSR), Static Site Generation (SSG), and Incremental Static Regeneration (ISR) to fetch and display token data efficiently.
+This application leverages Next.js's powerful data fetching methods to enhance performance and user experience. Specifically, it uses Server-Side Rendering (SSR), Static Site Generation (SSG), and Incremental Static Regeneration (ISR) to fetch and display token data efficiently.
 
 **Key Data Fetching Strategies**
 + Server-Side Rendering (SSR)
@@ -91,6 +96,11 @@ Allows users to mark/unmark tokens as favorites, persisting favorites in localSt
 + ISR: The revalidate option is set to 60 seconds, allowing the page to be updated at most once every minute. This means that if a request is made after 60 seconds from the previous request, Next.js will regenerate the page in the background.
 
 ------------------------------------------------------------------------------------------------------------
+**Project Dependencies:**
++ NEXT_PUBLIC_STAGING_BASE_URL: this url value should be placed in the env and must be available in order for the tokens to be fetched
++ framer-motion for animating user actions and token card animation
++ Axios is used here as library of choice to fetch the tokens
++ styled-components: for styling, enabling CSS-in-JS and scoped styles.
 
 
 **Additional Files and Their Usage**
