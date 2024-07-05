@@ -1,3 +1,4 @@
+import React, { useEffect } from "react";
 import Overview from "../components/Overview";
 import { GetServerSideProps } from "next";
 import { Token } from "../utils/tokenInterface";
@@ -8,6 +9,16 @@ interface HomePageProps {
 }
 
 const Home: React.FC<HomePageProps> = ({ tokens }) => {
+    useEffect(() => {
+        removeFouc(document.documentElement);
+    });
+
+    const removeFouc = (foucElement: any) => {
+        foucElement.className = foucElement.className.replace(
+            "no-fouc",
+            "fouc"
+        );
+    };
     return (
         <>
             <Overview tokens={tokens} />
