@@ -1,7 +1,7 @@
 import React from "react";
 import { Token } from "../utils/tokenInterface";
 import TokenItem from "./TokenItem";
-import { motion, AnimatePresence } from "framer-motion";
+import { AnimatePresence } from "framer-motion";
 import { NoTokens, NoTokensDescription, TokenListWrapper } from "./styles/TokenListStyle";
 import Image from "next/image";
 import tokenCat from "../public/images/cat.png";
