@@ -2,6 +2,7 @@ import React, { useState, useEffect } from "react";
 import {
     NotificationContainer,
     NotificationText,
+    NotificationIcon
 } from "./styles/CustomNotification";
 
 interface NotificationProps {
@@ -31,9 +32,9 @@ const CustomNotification: React.FC<NotificationProps> = ({
 
     return (
         <NotificationContainer className={visible ? "visible" : "not-visible"}>
-            <span className="material-symbols-outlined">
+            <NotificationIcon className="material-symbols-outlined">
                 notifications_active
-            </span>
+            </NotificationIcon>
             <NotificationText>{message}</NotificationText>
         </NotificationContainer>
     );

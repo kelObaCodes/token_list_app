@@ -65,3 +65,6 @@ export const NotificationText = styled.p`
     ${mediumHeaderTagtextSize}
     padding-left : 1rem;
 `;
+export const NotificationIcon = styled.span`
+  
+`;

@@ -50,3 +50,13 @@ export const RightPaginationButton = styled(PaginationButton)`
 export const LeftPaginationButton = styled(PaginationButton)`
     left: 0;
 `;
+export const ChevIconForward = styled.span`
+
+`;
+export const ChevIconBack = styled.span`
+
+`;
+export const PageText = styled.span`
+
+`;
+

@@ -1,5 +1,6 @@
 import styled from "styled-components";
-import { headerTagtextSize, pTagtextSize } from "./mixins";
+import { pTagtextSize } from "./mixins";
+import { motion } from "framer-motion";
 
 export const NoTokens = styled.div`
     display: flex;
@@ -19,4 +20,14 @@ export const NoTokens = styled.div`
 export const NoTokensDescription = styled.p`
     ${pTagtextSize}
     font-weight: 600;
+`;
+
+export const TokenListWrapper = styled(motion.div)`
+   display: grid;
+  position: relative;
+  grid-template-columns: repeat(auto-fill, minmax(210px, 1fr));
+  grid-column-gap: 1rem;
+  grid-row-gap: 1rem;
+  margin-top: 1rem;
+  margin-bottom: 5%;
 `;

@@ -24,6 +24,9 @@ export const TokenName = styled.h1`
     word-wrap: break-word;
 `;
 
+export const FavIcon = styled.span`
+    
+`;
 export const TokenTitle = styled.p`
     ${mediumHeaderTagtextSize};
     color: ${colors.black};

@@ -26,7 +26,7 @@ You can start editing the page by modifying `pages/index.tsx`. The page auto-upd
                                          +-----------+-------------+
                                                      |
                        +-----------------+-----------+------------+----------------------+
-                       | Pagination Component        |  SearchBar Component              |
+                       | Pagination Component        |  SearchInput Component              |
                        +-----------+-----------------+------------+----------------------+
                                    |                                      |
           +------------------------+-------------------+------------------+--------------+
@@ -142,7 +142,7 @@ Allows users to mark/unmark tokens as favorites, persisting favorites in localSt
 + Allows navigation between pages with Next and Previous buttons.
 + Uses next/router for URL manipulation.
 
-**3. SearchBar Component (SearchInput.tsx):**
+**3. SearchInput Component (SearchInput.tsx):**
 + Purpose: Provides a search input field.
 + Functionality:
 + Initializes search term from URL query parameters.

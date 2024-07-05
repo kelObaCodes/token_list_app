@@ -4,6 +4,9 @@ import {
     PaginationContainer,
     RightPaginationButton,
     LeftPaginationButton,
+    ChevIconForward,
+    ChevIconBack,
+    PageText
 } from "./styles/PaginationStyle";
 
 interface PaginationProps {
@@ -41,22 +44,26 @@ const Pagination: React.FC<PaginationProps> = ({
     return (
         <PaginationContainer>
             {currentPage > 1 && (
-                <LeftPaginationButton onClick={() => changePage(currentPage - 1)}>
-                    <span className="material-symbols-outlined">
+                <LeftPaginationButton
+                    onClick={() => changePage(currentPage - 1)}
+                >
+                    <ChevIconBack className="material-symbols-outlined">
                         chevron_backward
-                    </span>
+                    </ChevIconBack>
                     Prev
                 </LeftPaginationButton>
             )}
-            <span>
+            <PageText>
                 Page {currentPage} of {totalPages}
-            </span>
+            </PageText>
             {currentPage < totalPages && (
-                <RightPaginationButton onClick={() => changePage(currentPage + 1)}>
+                <RightPaginationButton
+                    onClick={() => changePage(currentPage + 1)}
+                >
                     Next
-                    <span className="material-symbols-outlined">
+                    <ChevIconForward className="material-symbols-outlined">
                         chevron_forward
-                    </span>
+                    </ChevIconForward>
                 </RightPaginationButton>
             )}
         </PaginationContainer>
