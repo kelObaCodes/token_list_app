@@ -53,7 +53,7 @@ const TokenDetail: React.FC<TokenDetailPageProps> = ({ token }) => {
                 // Display token image if available
                 <TokenImage src={token.logoURI} alt={token.name} />
             ) : (
-                // This Image Displays if above is not available
+                // This image displays if above is not available
                 <Image
                 src={"/images/bitcoin-logo.png"}
                 alt={token.name}
