@@ -1,81 +1,89 @@
-// pages/index.tsx
-import React, { useState, useEffect, useMemo } from "react";
-import TokenList from "./TokenList";
+import React, { useState } from "react";
 import { Token } from "../utils/tokenInterface";
-
+import useSearchTokens from "../hooks/useSearchTokens";
+import usePagination from "../hooks/usePagination";
+import useFavorites from "../hooks/useFavourites";
+import SearchBar from "./SearchInput";
+import TokenList from "./TokenList";
+import Pagination from "./Pagination";
+import CustomNotification from "./CustomNotification";
+import Tabs from "./Tabs";
+import {
+    TokenContainer,
+    HeaderText,
+    Header,
+    MainContent,
+} from "./styles/OverviewStyle";
 interface OverviewPageProps {
     tokens: Token[];
 }
 
 const Overview: React.FC<OverviewPageProps> = ({ tokens }) => {
-    const [searchTerm, setSearchTerm] = useState("");
-    const [currentPage, setCurrentPage] = useState(1);
     const tokensPerPage = 50;
-
-    const filteredTokens = useMemo(() => {
-        const searchTermLower = searchTerm.toLowerCase().trim();
-        if (searchTermLower === "") {
-            return tokens;
-        } else {
-            return tokens.filter(
-                (token) =>
-                    token.name.toLowerCase().includes(searchTermLower) ||
-                    token.symbol.toLowerCase().includes(searchTermLower)
-            );
+    const [notificationMessage, setNotificationMessage] = useState<string>("");
+    const [notificationKey, setNotificationKey] = useState<string>("");
+    const [currentTab, setCurrentTab] = useState<"all" | "favorites">("all");
+    const { favorites, handleToggleFavorite } = useFavorites(
+        (message: string) => {
+            setNotificationMessage(message);
+            setNotificationKey(Date.now().toString());
         }
-    }, [searchTerm, tokens]);
-
-    const totalPages = useMemo(
-        () => Math.ceil(filteredTokens.length / tokensPerPage),
-        [filteredTokens]
     );
-    const currentTokens = useMemo(() => {
-        const startIdx = (currentPage - 1) * tokensPerPage;
-        return filteredTokens.slice(startIdx, startIdx + tokensPerPage);
-    }, [currentPage, filteredTokens]);
+    const { searchTerm, setSearchTerm, filteredTokens } = useSearchTokens(
+        tokens,
+        currentTab,
+        favorites
+    );
 
-    const handlePageChange = (page: number) => {
-        setCurrentPage(page);
+    const { currentPage, totalPages, currentTokens, handlePageChange } =
+        usePagination(filteredTokens, tokensPerPage);
+
+    const sortedTokens = [...currentTokens].sort((a, b) => {
+        if (favorites.includes(a.address) && !favorites.includes(b.address))
+            return -1;
+        if (!favorites.includes(a.address) && favorites.includes(b.address))
+            return 1;
+        return 0;
+    });
+
+    const handleTabChange = (tab: "all" | "favorites") => {
+        setCurrentTab(tab);
     };
 
-    useEffect(() => {
-        // Reset to first page whenever the search term changes (i might change this to retain current context)
-        setCurrentPage(1); 
-    }, [searchTerm]);
-
     return (
-        <div>
-            <h1>Token Information</h1>
-            <input
-                type="text"
-                placeholder="Search Tokens"
-                value={searchTerm}
-                onChange={(e) => setSearchTerm(e.target.value)}
+        <TokenContainer>
+            <Header>
+                <HeaderText>LI.Fi Tokens</HeaderText>
+            </Header>
+
+            <SearchBar searchTerm={searchTerm} setSearchTerm={setSearchTerm} />
+            <Tabs
+                currentTab={currentTab}
+                handleTabChange={handleTabChange}
+                setSearchTerm={setSearchTerm}
+                setCurrentTab={setCurrentTab}
             />
-            <TokenList tokens={currentTokens} />
+
+            <CustomNotification
+                message={notificationMessage}
+                keyProp={notificationKey}
+            />
+            <MainContent>
+                <TokenList
+                    tokens={sortedTokens}
+                    favorites={favorites}
+                    toggleFavorite={handleToggleFavorite}
+                />
+            </MainContent>
 
             {!searchTerm && (
-                <div className="pagination">
-                    {currentPage > 1 && (
-                        <button
-                            onClick={() => handlePageChange(currentPage - 1)}
-                        >
-                            Previous
-                        </button>
-                    )}
-                    <span>
-                        Page {currentPage} of {totalPages}
-                    </span>
-                    {currentPage < totalPages && (
-                        <button
-                            onClick={() => handlePageChange(currentPage + 1)}
-                        >
-                            Next
-                        </button>
-                    )}
-                </div>
+                <Pagination
+                    currentPage={currentPage}
+                    totalPages={totalPages}
+                    handlePageChange={handlePageChange}
+                />
             )}
-        </div>
+        </TokenContainer>
     );
 };
 

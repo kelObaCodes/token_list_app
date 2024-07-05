@@ -1,25 +1,45 @@
 import React from "react";
-import Link from "next/link";
-import { TokenListProps } from "../utils/tokenInterface";
+import { Token } from "../utils/tokenInterface";
+import TokenItem from "./TokenItem";
+import { AnimatePresence } from "framer-motion";
+import { NoTokens, NoTokensDescription, TokenListWrapper } from "./styles/TokenListStyle";
+import Image from "next/image";
+import tokenCat from "../public/images/cat.png";
+interface TokenListProps {
+    tokens: Token[];
+    favorites: string[];
+    toggleFavorite: (tokenAddress: string, tokenName: string) => void;
+}
 
-const TokenList: React.FC<TokenListProps> = ({ tokens }) => {
+const TokenList: React.FC<TokenListProps> = ({
+    tokens,
+    favorites,
+    toggleFavorite,
+}) => {
     return (
-        <div>
-            {tokens.map((token, index) => (
-                <div key={`${token.address}-${index}`} className="token-row">
-                    <img
-                        src={token.logoURI}
-                        alt={token.name}
-                        width={30}
-                        height={30}
-                    />
-                    <Link href={`/token/${token.chainId}/${token.address}`}>
-                        {token.name} ({token.symbol})
-                    </Link>
-                    <p>{token.address}</p>
-                </div>
-            ))}
-        </div>
+        <>
+            {tokens.length > 0 ? (
+                <AnimatePresence mode="wait" initial={false}>
+                    <TokenListWrapper layout className="token-list">
+                        {tokens.map((token, index) => (
+                            <TokenItem
+                                token={token}
+                                isfavorite={favorites.includes(token.address)}
+                                toggleFavorite={toggleFavorite}
+                                key={`${token.address}-${index}`}
+                            />
+                        ))}
+                    </TokenListWrapper>
+                </AnimatePresence>
+            ) : (
+                <NoTokens>
+                    <Image src={tokenCat} alt="coin cat" width={240} />
+                    <NoTokensDescription>
+                        No token present or someone might have it :)
+                    </NoTokensDescription>
+                </NoTokens>
+            )}
+        </>
     );
 };
 
