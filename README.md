@@ -101,6 +101,7 @@ Allows users to mark/unmark tokens as favorites, persisting favorites in localSt
 + framer-motion for animating user actions and token card animation
 + Axios is used here as library of choice to fetch the tokens
 + styled-components: for styling, enabling CSS-in-JS and scoped styles.
++ Fonts and Font icons from fonts.googleapis.com for styling.
 
 
 **Additional Files and Their Usage**
