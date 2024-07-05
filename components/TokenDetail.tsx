@@ -8,6 +8,7 @@ import {
     FavoriteButton,
     TokenTitle,
 } from "./styles/TokenDetailStyle";
+import Image from "next/image";
 
 interface TokenDetailPageProps {
     token: Token;
@@ -44,7 +45,11 @@ const TokenDetail: React.FC<TokenDetailPageProps> = ({ token }) => {
             {token.logoURI ? (
                 <TokenImage src={token.logoURI} alt={token.name} />
             ) : (
-                <TokenImage src="/images/bitcoin-logo.png" alt={token.name} />
+                <Image
+                    src={"/images/bitcoin-logo.png"}
+                    alt={token.name}
+                    width={240}
+                />
             )}
             <TokenTitle> Address: </TokenTitle>
             <TokenInfo>{token.address}</TokenInfo>
@@ -58,15 +63,16 @@ const TokenDetail: React.FC<TokenDetailPageProps> = ({ token }) => {
             <TokenInfo>{token.coinKey}</TokenInfo>
             <FavoriteButton
                 onClick={handleFavoriteClick}
-                className={`pushable ${
-                    isfavorite ? "is-fav" : ""
-                }`}
+                className={`pushable ${isfavorite ? "is-fav" : ""}`}
             >
-                <span 
-                 className={` ${
-                    isfavorite ? "is-fav-hover" : "inactive-btn"
-                }`}>  {isfavorite ? "remove as favorite" : "add as favorite"}</span>
-              
+                <span
+                    className={` ${
+                        isfavorite ? "is-fav-hover" : "inactive-btn"
+                    }`}
+                >
+                    {" "}
+                    {isfavorite ? "remove as favorite" : "add as favorite"}
+                </span>
             </FavoriteButton>
         </TokenDetailWrapper>
     );

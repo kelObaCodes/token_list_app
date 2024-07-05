@@ -2,8 +2,9 @@ import React from "react";
 import { Token } from "../utils/tokenInterface";
 import TokenItem from "./TokenItem";
 import { motion, AnimatePresence } from "framer-motion";
-import { NoTokens } from "./styles/TokenListStyle";
-
+import { NoTokens, NoTokensDescription } from "./styles/TokenListStyle";
+import Image from "next/image";
+import tokenCat from "../public/images/cat.png";
 interface TokenListProps {
     tokens: Token[];
     favorites: string[];
@@ -32,8 +33,10 @@ const TokenList: React.FC<TokenListProps> = ({
                 </AnimatePresence>
             ) : (
                 <NoTokens>
-                    <img height={200} src="/images/cat.png" />
-                    <h4>No token present or someone might have it :)</h4>
+                    <Image src={tokenCat} alt="coin cat" width={240} />
+                    <NoTokensDescription>
+                        No token present or someone might have it :)
+                    </NoTokensDescription>
                 </NoTokens>
             )}
         </>
