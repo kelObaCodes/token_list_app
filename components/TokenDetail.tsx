@@ -7,7 +7,9 @@ import {
     TokenInfo,
     FavoriteButton,
     TokenTitle,
+    FavIcon
 } from "./styles/TokenDetailStyle";
+import Image from "next/image";
 
 interface TokenDetailPageProps {
     token: Token;
@@ -16,14 +18,20 @@ interface TokenDetailPageProps {
 const TokenDetail: React.FC<TokenDetailPageProps> = ({ token }) => {
     const [isfavorite, setIsFavorite] = useState(false);
 
+  
     useEffect(() => {
+        // Get the list of favorite tokens from local storage
         const favorites = JSON.parse(localStorage.getItem("favorites") || "[]");
+    
         setIsFavorite(favorites.includes(token.address));
     }, [token.address]);
 
+
     const handleFavoriteClick = () => {
+        // Get the list of favorite tokens from local storage
         const favorites = JSON.parse(localStorage.getItem("favorites") || "[]");
         if (favorites.includes(token.address)) {
+            // If the token is already a favorite, remove it from the list
             localStorage.setItem(
                 "favorites",
                 JSON.stringify(
@@ -42,10 +50,18 @@ const TokenDetail: React.FC<TokenDetailPageProps> = ({ token }) => {
         <TokenDetailWrapper>
             <TokenName>{token.name}</TokenName>
             {token.logoURI ? (
+                // Display token image if available
                 <TokenImage src={token.logoURI} alt={token.name} />
             ) : (
-                <TokenImage src="/images/bitcoin-logo.png" alt={token.name} />
+                // This image displays if above is not available
+                <Image
+                src={"/images/bitcoin-logo.png"}
+                alt={token.name}
+                width={200}
+                height={200}
+            />
             )}
+             
             <TokenTitle> Address: </TokenTitle>
             <TokenInfo>{token.address}</TokenInfo>
             <TokenTitle> Chain Id: </TokenTitle>
@@ -58,15 +74,14 @@ const TokenDetail: React.FC<TokenDetailPageProps> = ({ token }) => {
             <TokenInfo>{token.coinKey}</TokenInfo>
             <FavoriteButton
                 onClick={handleFavoriteClick}
-                className={`pushable ${
-                    isfavorite ? "is-fav" : ""
-                }`}
+                className={`pushable ${isfavorite ? "is-fav" : ""}`}
             >
-                <span 
-                 className={` ${
-                    isfavorite ? "is-fav-hover" : "inactive-btn"
-                }`}>  {isfavorite ? "remove as favorite" : "add as favorite"}</span>
-              
+                <FavIcon
+                    className={` ${isfavorite ? "is-fav-hover" : "inactive-btn"}`}
+                >
+                    {" "}
+                    {isfavorite ? "remove as favorite" : "add as favorite"}
+                </FavIcon>
             </FavoriteButton>
         </TokenDetailWrapper>
     );

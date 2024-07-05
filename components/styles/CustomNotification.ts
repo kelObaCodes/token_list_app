@@ -1,5 +1,10 @@
-import styled, { keyframes } from "styled-components";
-import { colors, boxShadow, borderRadius } from "./mixins";
+import styled, { css, keyframes } from "styled-components";
+import {
+    colors,
+    boxShadow,
+    borderRadius,
+    mediumHeaderTagtextSize,
+} from "./mixins";
 
 const fadeIn = keyframes`
     from {
@@ -22,8 +27,15 @@ const fadeOut = keyframes`
         transform: translateY(-20px);
     }
 `;
+const visibleStyles = css`
+    animation: ${fadeIn} 0.5s forwards;
+`;
 
-export const NotificationContainer = styled.div<{ visible: boolean }>`
+const hiddenStyles = css`
+    animation: ${fadeOut} 0.5s forwards;
+`;
+
+export const NotificationContainer = styled.div`
     ${boxShadow}
     ${borderRadius}
     position: fixed;
@@ -36,5 +48,23 @@ export const NotificationContainer = styled.div<{ visible: boolean }>`
     color: ${colors.black};
     padding: 10px 20px;
     z-index: 1000;
-    animation: ${({ visible }) => (visible ? fadeIn : fadeOut)} 0.5s forwards;
+    .visible {
+        ${visibleStyles}
+    }
+    .not-visible {
+        ${hiddenStyles}
+    }
+
+    @media (max-width: 768px) {
+        right: 10px;
+        left: 10px;
+    }
+`;
+
+export const NotificationText = styled.p`
+    ${mediumHeaderTagtextSize}
+    padding-left : 1rem;
+`;
+export const NotificationIcon = styled.span`
+  
 `;

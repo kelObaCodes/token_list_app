@@ -2,7 +2,7 @@ import styled from "styled-components";
 
 import { colors, borderRadius, borderColor } from "./mixins";
 
-export const PaginationContainer = styled.div`
+export const PaginationContainer = styled.footer`
     box-shadow: 0 -2px 5px rgba(0, 0, 0, 0.1);
     position: sticky;
     bottom: 0;
@@ -50,3 +50,13 @@ export const RightPaginationButton = styled(PaginationButton)`
 export const LeftPaginationButton = styled(PaginationButton)`
     left: 0;
 `;
+export const ChevIconForward = styled.span`
+
+`;
+export const ChevIconBack = styled.span`
+
+`;
+export const PageText = styled.span`
+
+`;
+

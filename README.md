@@ -26,7 +26,7 @@ You can start editing the page by modifying `pages/index.tsx`. The page auto-upd
                                          +-----------+-------------+
                                                      |
                        +-----------------+-----------+------------+----------------------+
-                       | Pagination Component        |  SearchBar Component              |
+                       | Pagination Component        |  SearchInput Component              |
                        +-----------+-----------------+------------+----------------------+
                                    |                                      |
           +------------------------+-------------------+------------------+--------------+
@@ -128,17 +128,12 @@ Allows users to mark/unmark tokens as favorites, persisting favorites in localSt
 
 + **State Management:** Uses local state (useState) and side effects (useEffect) to manage component-level state and synchronize state with URL query parameters.
 
-+ **Styling:** Utilizes styled-components for styling, allowing for CSS-in-JS and scoped styles. Mixins are used for consistent styling across components.
++ **Styling:** Utilizes styled-components for styling, enabling CSS-in-JS and scoped styles. Mixins ensure consistent styling across components. Each component has its own dedicated styles, resulting in consistent, scoped, and encapsulated styling without interference from other components.
 
 + **Routing:** Leverages next/router for client-side routing and managing URL query parameters (search and page).
 
 **1. Overview (Overview.tsx)**
 + Purpose: Main page component that displays a list of tokens with search and pagination functionality.
-
-**Hooks:**
-+ useSearchTokens: Manages the search functionality.
-+ usePagination: Manages pagination.
-+ useFavorites: Manages favorite tokens.
 
 **2. Pagination Component (Pagination.tsx):**
 + Purpose: Provides pagination controls.
@@ -147,7 +142,7 @@ Allows users to mark/unmark tokens as favorites, persisting favorites in localSt
 + Allows navigation between pages with Next and Previous buttons.
 + Uses next/router for URL manipulation.
 
-**3. SearchBar Component (SearchInput.tsx):**
+**3. SearchInput Component (SearchInput.tsx):**
 + Purpose: Provides a search input field.
 + Functionality:
 + Initializes search term from URL query parameters.
@@ -186,6 +181,29 @@ Allows users to mark/unmark tokens as favorites, persisting favorites in localSt
 + Purpose: Shows notifications for actions like adding/removing tokens from favorites.
 + Functionality:
 + Controls visibility and duration of notifications using state and useEffect.
+
+
+**Hooks:**
+
+**1. useFavorites (useFavorites.ts):**
++ Purpose: Manages the state of favorite tokens.
++ Functionality:
++ Toggles the favorite status of a token and updates localStorage.
++ Returns the list of favorite tokens and a function to handle toggling.
+
+**2. usePagination (usePagination.ts):**
++ Purpose: Manages pagination state and logic.
++ Functionality:
++ Computes the total number of pages and the tokens to display on the current page.
++ Handles page changes and updates the current page state.
+
+**3. usePagination (usePagination.ts):**
++ useSearchTokens (useSearchTokens.ts):
++ Purpose: Filters tokens based on the search term and selected tab.
++ Functionality:
++ Filters tokens based on search term and whether they are in the favorites list.
++ Manages search term state.
+
 ------------------------------------------------------------------------------------------------------------
 
 **Challenges and Solutions**

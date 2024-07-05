@@ -10,7 +10,9 @@ import CustomNotification from "./CustomNotification";
 import Tabs from "./Tabs";
 import {
     TokenContainer,
-    HeaderText
+    HeaderText,
+    Header,
+    MainContent,
 } from "./styles/OverviewStyle";
 interface OverviewPageProps {
     tokens: Token[];
@@ -20,7 +22,7 @@ const Overview: React.FC<OverviewPageProps> = ({ tokens }) => {
     const tokensPerPage = 50;
     const [notificationMessage, setNotificationMessage] = useState<string>("");
     const [notificationKey, setNotificationKey] = useState<string>("");
-    const [currentTab, setCurrentTab] = useState<"all" | "favorites" >("all");
+    const [currentTab, setCurrentTab] = useState<"all" | "favorites">("all");
     const { favorites, handleToggleFavorite } = useFavorites(
         (message: string) => {
             setNotificationMessage(message);
@@ -36,7 +38,6 @@ const Overview: React.FC<OverviewPageProps> = ({ tokens }) => {
     const { currentPage, totalPages, currentTokens, handlePageChange } =
         usePagination(filteredTokens, tokensPerPage);
 
-
     const sortedTokens = [...currentTokens].sort((a, b) => {
         if (favorites.includes(a.address) && !favorites.includes(b.address))
             return -1;
@@ -51,21 +52,30 @@ const Overview: React.FC<OverviewPageProps> = ({ tokens }) => {
 
     return (
         <TokenContainer>
-            <HeaderText>LI.Fi Tokens</HeaderText>
+            <Header>
+                <HeaderText>LI.Fi Tokens</HeaderText>
+            </Header>
+
             <SearchBar searchTerm={searchTerm} setSearchTerm={setSearchTerm} />
-            <Tabs currentTab={currentTab} handleTabChange={handleTabChange} setSearchTerm={setSearchTerm}
-            setCurrentTab={setCurrentTab}
-           
-           />
+            <Tabs
+                currentTab={currentTab}
+                handleTabChange={handleTabChange}
+                setSearchTerm={setSearchTerm}
+                setCurrentTab={setCurrentTab}
+            />
+
             <CustomNotification
                 message={notificationMessage}
                 keyProp={notificationKey}
             />
-            <TokenList
-                tokens={sortedTokens}
-                favorites={favorites}
-                toggleFavorite={handleToggleFavorite}
-            />
+            <MainContent>
+                <TokenList
+                    tokens={sortedTokens}
+                    favorites={favorites}
+                    toggleFavorite={handleToggleFavorite}
+                />
+            </MainContent>
+
             {!searchTerm && (
                 <Pagination
                     currentPage={currentPage}
